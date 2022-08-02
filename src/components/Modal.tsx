@@ -24,7 +24,7 @@ export function Modal({
     >
       <motion.div
         variants={modalVariants}
-        className=" bg-white rounded-lg relative p-4 w-full max-h-full overflow-y-auto"
+        className=" bg-white rounded-lg relative p-4 w-full max-h-screen  md:max-w-lg overflow-y-auto"
       >
         <button
           type="button"

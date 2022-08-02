@@ -24,19 +24,18 @@ export function Home() {
 
   return (
     <>
-      <div className="p-4 md:max-w-3xl m-auto">
+      <div className="p-4 md:max-w-3xl m-auto relative">
         <Header />
         <Dashboard />
         <main className="py-7">
-          <section className=" py-5 text-center">
-            <h2 className="font-bold text-lg">Hambúrgueres</h2>
-            <p className="text-gray-500 text-sm">
-              Conheça nossos hambúrgueres tradicionais
-            </p>
-            <div
-              id="Hambúrgueres"
-              className="flex justify-center items-center flex-wrap gap-4 pt-4"
-            >
+          <section>
+            <div className="text-center ">
+              <h2 className="font-bold text-lg">Hambúrgueres</h2>
+              <p className="text-gray-500 text-sm">
+                Conheça nossos hambúrgueres tradicionais
+              </p>
+            </div>
+            <div className="flex flex-col gap-4 pt-2">
               {burgers.map((item) => {
                 return (
                   <BurgerCard

@@ -18,7 +18,7 @@ export function EventModalWatch({
       animate={isModalOpen ? 'show' : 'hidden'}
       variants={overlayVariants}
     >
-      <motion.div variants={modalVariants} className="w-full p-4 ">
+      <motion.div variants={modalVariants} className="w-full p-4 md:max-w-lg">
         <div className="bg-white p-4 rounded-t-lg">
           <header>
             <h4 className="text-base font-bold">Horários de atendimento:</h4>

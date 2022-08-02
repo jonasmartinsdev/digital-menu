@@ -28,7 +28,7 @@ export function FormAddress({
 
   return (
     <Modal isModalOpenAddress={isModalOpenAddress} onClick={handleCloseModal}>
-      <form action="" className="p-4  overflow-y-auto flex flex-col gap-2">
+      <form action="" className="p-4  overflow-y-auto flex flex-col gap-2 ">
         <h1 className="text-xl font-semibold pb-3">
           Insira o endereço de entrega
         </h1>

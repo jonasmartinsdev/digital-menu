@@ -76,10 +76,13 @@ export function Footer() {
   const totalItems = cartItemsTotal + 2
 
   return (
-    <div className="sticky bottom-0 left-0  shadow-xl rounded-t-lg">
+    <div className="sticky bottom-0 float-right w-full rounded-t-lg md:max-w-lg md:fixed ">
       <button
         onClick={handleToggleModal}
-        className="flex items-center justify-between gap-4 text-lg p-4 bg-white text-blue-600 border-b pb-2  w-full"
+        className="flex items-center justify-between gap-4 text-lg p-4 shadow-inner
+
+        bg-white text-blue-600 pb-2 
+        w-full md:rounded-tr-xl border"
       >
         <div className="flex items-center gap-4 text-left">
           <Storefront size={30} />
@@ -98,7 +101,7 @@ export function Footer() {
         )}
       </button>
       <motion.div animate={isModalOpen ? 'open' : 'closed'} variants={variants}>
-        <div className="p-4  border-b bg-gray-200">
+        <div className="p-4 border-b bg-gray-200">
           {address ? (
             <div className="flex items-center gap-2">
               <Truck size={25} />
@@ -140,7 +143,7 @@ export function Footer() {
           })}
         </div>
 
-        <div className="p-2 bg-white border-t border-gray-200">
+        <div className="p-4 bg-white border-t border-gray-200">
           <div className="text-sm flex items-center justify-between">
             <span>Valor dos produtos</span>
             <span>R$ {formatMoney(cartItemsTotal)}</span>
