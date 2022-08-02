@@ -18,7 +18,7 @@ export function Modal({
 }: BackdropProps) {
   return ReactDom.createPortal(
     <motion.div
-      className="p-2 fixed hidden items-center justify-center w-full h-full top-0 left-0 bg-[#00000090] z-[9998] "
+      className="fixed hidden items-center justify-center w-full h-full top-0 left-0 bg-[#00000090] z-[9998] "
       animate={isModalOpenAddress ? 'show' : 'hidden'}
       variants={overlayVariants}
     >

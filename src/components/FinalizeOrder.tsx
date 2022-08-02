@@ -218,10 +218,7 @@ export function FinalizeOrder({
           </div>
 
           <div className="py-4 flex flex-col">
-            <label
-              htmlFor=""
-              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-            >
+            <label htmlFor="" className="block text-gray-500 font-bold  mb-1 ">
               Observações
             </label>
             <textarea
@@ -233,10 +230,7 @@ export function FinalizeOrder({
 
           <div className="grid grid-cols-2 gap-8">
             <div className="flex flex-col">
-              <label
-                htmlFor=""
-                className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              >
+              <label htmlFor="" className="block text-gray-500 font-bold mb-1">
                 Nome do Cliente
               </label>
               <input
@@ -253,7 +247,7 @@ export function FinalizeOrder({
             <div className="flex flex-col">
               <label
                 htmlFor=""
-                className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                className="block text-gray-500 font-bold mb-1 pr-4"
               >
                 Telefone <span className="text-xs">(Com DDD)</span>
               </label>
