@@ -36,7 +36,6 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     0,
   )
 
-  console.log(cartItemsTotal)
   function addBurgerToCart(data: CreateCardData) {
     const burgerAlreadyExistisInCart = cartItems.findIndex(
       (burger) => burger.id === data.id,
