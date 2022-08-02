@@ -29,30 +29,7 @@ interface CartContextProviderProps {
 }
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cartItems, setCartItems] = useState<CreateCardData[]>([
-    {
-      id: 1,
-      name: 'Best Bacon Cheddar',
-      description:
-        'Bacon, Cheddar, Hambúguer Angus 180g, Molho Barbecue, Pão Especial',
-      photo:
-        'https://static.expressodelivery.com.br/imagens/produtos/64905/180/Expresso-Delivery_3103ea9e2ecca2317cf4c4d1494cbda5.jpg',
-      price: 20.0,
-      quantity: 1,
-      observation: '',
-    },
-    {
-      id: 2,
-      name: 'X tudo',
-      description:
-        'Bacon, Cheddar, Hambúguer Angus 180g, Molho Barbecue, Pão Especial',
-      photo:
-        'https://static.expressodelivery.com.br/imagens/produtos/64905/180/Expresso-Delivery_3103ea9e2ecca2317cf4c4d1494cbda5.jpg',
-      price: 20.0,
-      quantity: 1,
-      observation: 'Retirar o presunto por favor',
-    },
-  ])
+  const [cartItems, setCartItems] = useState<CreateCardData[]>([])
 
   const cartItemsTotal = cartItems.reduce(
     (total, item) => total + item.quantity * item.price,
