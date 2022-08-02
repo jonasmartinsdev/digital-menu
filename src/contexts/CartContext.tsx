@@ -1,5 +1,6 @@
 import produce from 'immer'
 import { createContext, ReactNode, useState } from 'react'
+import { formatMoney } from '../utils/formatMoney'
 
 export interface BurgerProps {
   id: number
@@ -18,8 +19,7 @@ interface CartContextType {
   addBurgerToCart: (data: CreateCardData) => void
   removeItemCart: (cartItemId: number) => void
   cartItemsTotal: number
-  cartItem: CreateCardData[]
-  listItems: any
+  cartItems: CreateCardData[]
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -29,21 +29,42 @@ interface CartContextProviderProps {
 }
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cartItem, setCartItem] = useState<CreateCardData[]>([])
+  const [cartItems, setCartItems] = useState<CreateCardData[]>([
+    {
+      id: 1,
+      name: 'Best Bacon Cheddar',
+      description:
+        'Bacon, Cheddar, Hambúguer Angus 180g, Molho Barbecue, Pão Especial',
+      photo:
+        'https://static.expressodelivery.com.br/imagens/produtos/64905/180/Expresso-Delivery_3103ea9e2ecca2317cf4c4d1494cbda5.jpg',
+      price: 20.0,
+      quantity: 1,
+      observation: '',
+    },
+    {
+      id: 2,
+      name: 'X tudo',
+      description:
+        'Bacon, Cheddar, Hambúguer Angus 180g, Molho Barbecue, Pão Especial',
+      photo:
+        'https://static.expressodelivery.com.br/imagens/produtos/64905/180/Expresso-Delivery_3103ea9e2ecca2317cf4c4d1494cbda5.jpg',
+      price: 20.0,
+      quantity: 1,
+      observation: 'Retirar o presunto por favor',
+    },
+  ])
 
-  const listItems = cartItem.map((item) => {
-    return `*${item.quantity}x ${item.name}*%20%0A`
-  })
-
-  const cartItemsTotal = cartItem.reduce(
+  const cartItemsTotal = cartItems.reduce(
     (total, item) => total + item.quantity * item.price,
     0,
   )
+
+  console.log(cartItemsTotal)
   function addBurgerToCart(data: CreateCardData) {
-    const burgerAlreadyExistisInCart = cartItem.findIndex(
+    const burgerAlreadyExistisInCart = cartItems.findIndex(
       (burger) => burger.id === data.id,
     )
-    const newBurger = produce(cartItem, (draft) => {
+    const newBurger = produce(cartItems, (draft) => {
       if (burgerAlreadyExistisInCart < 0) {
         draft.push(data)
       } else {
@@ -51,31 +72,30 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       }
     })
 
-    setCartItem(newBurger)
+    setCartItems(newBurger)
   }
 
   function removeItemCart(cardItemId: number) {
-    const burgerAlreadyExistisInCart = cartItem.findIndex(
+    const burgerAlreadyExistisInCart = cartItems.findIndex(
       (burger) => burger.id === cardItemId,
     )
 
-    const updateCart = produce(cartItem, (draft) => {
+    const updateCart = produce(cartItems, (draft) => {
       if (burgerAlreadyExistisInCart >= 0) {
         draft.splice(burgerAlreadyExistisInCart, 1)
       }
     })
 
-    setCartItem(updateCart)
+    setCartItems(updateCart)
   }
 
   return (
     <CartContext.Provider
       value={{
         cartItemsTotal,
-        cartItem,
+        cartItems,
         addBurgerToCart,
         removeItemCart,
-        listItems,
       }}
     >
       {children}

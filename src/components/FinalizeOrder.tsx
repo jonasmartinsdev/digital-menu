@@ -7,7 +7,6 @@ import { formatMoney } from '../utils/formatMoney'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Modal } from './Modal'
-import { useNavigate } from 'react-router-dom'
 import { ErrosType } from './FormAddress'
 
 export interface FinalizeOrderProps {
@@ -38,7 +37,7 @@ const newPaymentFormValidateSchema = zod.object({
 export type NewPAymentFormDate = zod.infer<typeof newPaymentFormValidateSchema>
 
 interface NewOrderProps {
-  cartItem: CreateCardData[]
+  cartItems: CreateCardData[]
   number?: string | undefined
   street?: string | undefined
   complement?: string | undefined
@@ -62,7 +61,15 @@ export function FinalizeOrder({
 
   const { errors } = formState as unknown as ErrosType
 
-  const { cartItemsTotal, cartItem, listItems } = useContext(CartContext)
+  const { cartItemsTotal, cartItems } = useContext(CartContext)
+
+  const listItems = cartItems.map(
+    (item) =>
+      `*${item.quantity}x ${item.name}* (R$ ${formatMoney(item.price)})%0A${
+        item.observation &&
+        `%20%20%20%20%20*%E2%86%B3*%20%20_Obs%3A%20${item.observation}_%0A%0A`
+      }`,
+  )
 
   const totalItems = cartItemsTotal + 2
 
@@ -70,10 +77,15 @@ export function FinalizeOrder({
     const newOrderPedido = {
       ...data,
       ...address,
-      cartItem,
+      cartItems,
     }
 
-    window.location.href = `https://api.whatsapp.com/send/?phone=5533998064169&text=%F0%9F%9B%8D%20*Novo%20pedido%20via%20Jonas%3A*%0A%0A${listItems}%0A%0A*Valor*%0AProdutos%3A%20${formatMoney(
+    window.location.href = `https://api.whatsapp.com/send/?phone=5533998064169&text=%F0%9F%9B%8D%20*Novo%20pedido%20via%20Jonas%3A*%0A%0A${listItems.join(
+      '',
+    )}${
+      newOrderPedido.observation &&
+      `*Observações*%0A${newOrderPedido.observation}`
+    }%0A%0A*Valor*%0AProdutos%3A%20${formatMoney(
       cartItemsTotal,
     )}%0ATaxa%20de%20entrega%3A%2002%2C00%0ATotal%3A%20${formatMoney(
       totalItems,
@@ -122,7 +134,7 @@ export function FinalizeOrder({
             <div className="flex items-center gap-2">
               <div className="flex justify-between items-center w-full">
                 <div className="text-sm flex gap-1">
-                  <strong>{cartItem.length}</strong>
+                  <strong>{cartItems.length}</strong>
                   <strong>Produto</strong>
                 </div>
                 <button

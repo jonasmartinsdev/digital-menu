@@ -42,7 +42,7 @@ const newAddressFormValidateSchema = zod.object({
 export type NewAddressFormDate = zod.infer<typeof newAddressFormValidateSchema>
 
 export function Footer() {
-  const { cartItemsTotal, cartItem: data } = useContext(CartContext)
+  const { cartItemsTotal, cartItems } = useContext(CartContext)
   const [address, setAddress] = useState<NewAddressFormDate>()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isModalOpenAddress, setIsModalOpenAddress] = useState<number>(0)
@@ -77,12 +77,12 @@ export function Footer() {
 
   return (
     <div className="sticky bottom-0  w-full md:max-w-sm md:fixed md:ml-5 ">
-      <div className="drop-shadow-xl rounded-t-xl bg-white border p-4">
+      <div className="drop-shadow-xl rounded-t-xl bg-white border p-4 w-full">
         <button
           onClick={handleToggleModal}
           className="flex items-center justify-between gap-4 text-lg 
-        text-blue-600 pb-2 
-        w-full"
+        text-blue-600 pb-2  w-full
+        "
         >
           <div className="flex items-center gap-4 text-left">
             <Storefront size={30} />
@@ -93,10 +93,9 @@ export function Footer() {
               </p>
             </div>
           </div>
-
-          {data.length > 0 && (
+          {cartItems?.length >= 0 && (
             <div className="bg-red-600 p-2 text-white text-sm rounded-lg shadow-lg">
-              {data.length} item
+              {cartItems?.length} item
             </div>
           )}
         </button>
@@ -133,8 +132,8 @@ export function Footer() {
             )}
           </div>
           <div className="bg-white p-2  max-h-32 overflow-y-auto flex flex-col gap-2">
-            {data.length > 0 ? (
-              data.map((item) => {
+            {cartItems?.length >= 0 ? (
+              cartItems.map((item) => {
                 return (
                   <Request
                     key={item.id}
@@ -156,7 +155,7 @@ export function Footer() {
           <div className="p-4 bg-white border-t border-gray-200">
             <div className="text-sm flex items-center justify-between">
               <span>Valor dos produtos</span>
-              <span>R$ {formatMoney(cartItemsTotal)}</span>
+              {/* <span>R$ {formatMoney(cartItemsTotal)}</span> */}
             </div>
             <div className="text-sm flex items-center justify-between">
               <span>Taxa de entrega</span>
@@ -169,7 +168,7 @@ export function Footer() {
           </div>
           {address ? (
             <button
-              disabled={data.length === 0}
+              disabled={cartItems?.length === 0}
               onClick={handleModalPayment}
               className="p-4 bg-blue-600  text-white text-center text-sm w-full rounded-2xl"
             >

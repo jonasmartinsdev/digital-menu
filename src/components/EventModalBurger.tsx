@@ -57,7 +57,7 @@ export function EventModalBurger({
     >
       <motion.div
         variants={modalVariants}
-        className="bg-white max-w-[500px] max-h-full w-full m-4 rounded-lg overflow-y-auto "
+        className="bg-white max-w-[500px] max-h-screen  w-full m-4 rounded-lg overflow-y-auto "
       >
         <header className="relative">
           <img
