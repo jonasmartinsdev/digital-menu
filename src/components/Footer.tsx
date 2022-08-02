@@ -93,7 +93,7 @@ export function Footer() {
               </p>
             </div>
           </div>
-          {cartItems?.length >= 0 && (
+          {cartItems?.length > 0 && (
             <div className="bg-red-600 p-2 text-white text-sm rounded-lg shadow-lg">
               {cartItems?.length} item
             </div>
