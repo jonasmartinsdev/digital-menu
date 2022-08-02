@@ -35,7 +35,7 @@ export function Home() {
                 Conheça nossos hambúrgueres tradicionais
               </p>
             </div>
-            <div className="flex flex-col gap-4 pt-2">
+            <div className="grid gap-4 pt-2  md:grid-cols-2">
               {burgers.map((item) => {
                 return (
                   <BurgerCard
